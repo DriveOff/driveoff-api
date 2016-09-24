@@ -67,10 +67,6 @@ group :development, :test do
   # Use dotenv for environment variables
   gem 'dotenv-rails', :require => 'dotenv/rails-now'
   
-  # Annotate to get those DB schema into the models: https://github.com/ctran/annotate_models
-  # Run with `bundle exec annotate --models`
-  gem 'annotate', '~> 2.6.6'
-  
   # RSpec for Testing
   gem 'rspec-rails', '~> 3.0'
 end
@@ -81,6 +77,10 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  
+  # Annotate to get those DB schema into the models: https://github.com/ctran/annotate_models
+  # Run with `bundle exec annotate --models`
+  gem 'annotate', '~> 2.6.6'
 end
 
 group :test do
