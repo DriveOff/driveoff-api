@@ -50,6 +50,8 @@ class User < ActiveRecord::Base
                     :tsearch => {:prefix => true}
                   }
   
+  has_many :trips
+  
   # Users can friend each other
   has_and_belongs_to_many :users
 end
