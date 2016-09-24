@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   
   resources :businesses, only: [:index, :show, :create, :update, :destroy]
+  resources :rewards, only: [:index, :show, :create, :update, :destroy]
   delete 'logout' => 'user_sessions#destroy', :as => :logout
   
   # The priority is based upon order of creation: first created -> highest priority.

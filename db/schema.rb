@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160924190437) do
+ActiveRecord::Schema.define(version: 20160924200751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20160924190437) do
   end
 
   add_index "businesses", ["user_id"], name: "index_businesses_on_user_id", using: :btree
+
+  create_table "rewards", force: :cascade do |t|
+    t.integer "business_id"
+    t.string  "title",       null: false
+    t.text    "description"
+    t.integer "cost",        null: false
+  end
+
+  add_index "rewards", ["business_id"], name: "index_rewards_on_business_id", using: :btree
 
   create_table "trips", force: :cascade do |t|
     t.decimal  "start_lat",  precision: 10, scale: 6,             null: false
@@ -64,5 +73,6 @@ ActiveRecord::Schema.define(version: 20160924190437) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
 
   add_foreign_key "businesses", "users"
+  add_foreign_key "rewards", "businesses"
   add_foreign_key "trips", "users"
 end
