@@ -1,8 +1,9 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_action :set_trip, only: [:show, :update, :destroy]
+  before_action :set_user
 
   def index
-    @trips = Trip.all
+    @trips = @user.trips
     render json: @trips
   end
 
@@ -48,6 +49,10 @@ class TripsController < ApplicationController
   
     def set_trip
       @trip = Trip.find_by_id(params[:id])
+    end
+    
+    def set_user
+      @user = User.find_by_id(params[:user_id])
     end
 
     def trip_params

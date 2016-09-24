@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
   
-  resources :users, only: [:index, :show, :create, :update, :destroy]
-  resources :trips, only: [:index, :show, :create, :update, :destroy]
+  resources :users, only: [:index, :show, :create, :update, :destroy] do
+    resources :trips, only: [:index, :show, :create, :update, :destroy]
+  end
+  
   resources :businesses, only: [:index, :show, :create, :update, :destroy]
   delete 'logout' => 'user_sessions#destroy', :as => :logout
   

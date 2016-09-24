@@ -33,6 +33,9 @@ class User < ActiveRecord::Base
   include PgSearch
   authenticates_with_sorcery!
   
+  has_many :trips
+  has_many :businesses
+  
   validates :email, uniqueness: true, presence: true
   
   validates :password, length: { minimum: 8 }
@@ -49,8 +52,6 @@ class User < ActiveRecord::Base
                   :using => {
                     :tsearch => {:prefix => true}
                   }
-  
-  has_many :trips
   
   # Users can friend each other
   has_and_belongs_to_many :users

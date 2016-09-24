@@ -30,4 +30,9 @@ class Trip < ActiveRecord::Base
   validates :time, presence: true
   validates :points, presence: true
   validates :user, presence: true
+  
+  # We store distance in meters. Sometimes we'll want it in miles.
+  def distance_in_miles
+    (distance * 0.000621371).round(2)
+  end
 end
