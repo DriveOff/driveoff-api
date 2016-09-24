@@ -30,6 +30,7 @@
 #
 
 class User < ActiveRecord::Base
+  include PgSearch
   authenticates_with_sorcery!
   
   validates :email, uniqueness: true, presence: true
