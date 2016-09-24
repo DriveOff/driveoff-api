@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index, :show, :create, :update, :destroy]
   resources :trips, only: [:index, :show, :create, :update, :destroy]
+  resources :businesses, only: [:index, :show, :create, :update, :destroy]
   delete 'logout' => 'user_sessions#destroy', :as => :logout
   
   # The priority is based upon order of creation: first created -> highest priority.
