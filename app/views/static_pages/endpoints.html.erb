@@ -1,0 +1,37 @@
+<h1>Endpoints</h1>
+
+<p>Here, front-end people, a list of the json you can currently access.</p>
+<p>For the "show" endpoints, just change the ids in the URL as needed.</p>
+
+<ul>
+  <li>Users
+    <ul>
+      <li><%= link_to "Users index", :users %></li>
+      <li><%= link_to "User show", user_path(User.first) %></li>
+    </ul>
+  </li>
+  <li>Businesses
+    <ul>
+      <li><%= link_to "Businesses index", :businesses %></li>
+      <li><%= link_to "Business show", business_path(Business.first || 1) %></li>
+    </ul>
+  </li>
+  <li>Rewards
+    <ul>
+      <li><%= link_to "Rewards index", :rewards %></li>
+      <li><%= link_to "Reward show", reward_path(Reward.first || 1) %></li>
+    </ul>
+  </li>
+  <li>Trips
+    <ul>
+      <li><%= link_to "Trips index", user_trips_path(User.first) %></li>
+      <li><%= link_to "Trip show", user_trip_path({id: User.first.trips.first || 1, user_id: User.first}) %></li>
+    </ul>
+  </li>
+  <li>Redemptions
+    <ul>
+      <li><%= link_to "Redemptions index", user_redemptions_path(User.first) %></li>
+      <li><%= link_to "Redemption show", user_redemption_path({id: User.first.redemptions.first || 1, user_id: User.first}) %></li>
+    </ul>
+  </li>
+</ul>

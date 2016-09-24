@@ -48,7 +48,7 @@ class RedemptionsController < ApplicationController
   private
   
     def set_redemption
-      @redemption = Redemption.find(params[:id])
+      @redemption = Redemption.find_by_id(params[:id])
     end
   
     def set_user

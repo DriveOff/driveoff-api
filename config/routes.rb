@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
+  get '/endpoints' => 'static_pages#endpoints', as: :endpoints
   
   constraints format: :json do
     resources :users, only: [:index, :show, :create, :update, :destroy], defaults: { format: 'json' } do
