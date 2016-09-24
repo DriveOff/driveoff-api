@@ -83,6 +83,15 @@ class User < ActiveRecord::Base
   # Users can friend each other
   has_and_belongs_to_many :users
   
+  # Calculates the user's age based on their birthday
+  def age
+    now = Time.now.utc.to_date
+    
+    # Subtracts today's year from the birthday year, and then subtract 1 more
+    # year if the user's birthday has not passed yet
+    now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
+  end
+  
   private
 
     def validate_password?
