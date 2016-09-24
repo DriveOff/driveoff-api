@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160924202350) do
+ActiveRecord::Schema.define(version: 20160924213301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,11 +62,11 @@ ActiveRecord::Schema.define(version: 20160924202350) do
   add_index "trips", ["user_id"], name: "index_trips_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                                       null: false
-    t.string   "crypted_password",                            null: false
-    t.string   "salt",                                        null: false
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.string   "email",                                                  null: false
+    t.string   "crypted_password",                                       null: false
+    t.string   "salt",                                                   null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.string   "reset_password_token"
@@ -76,9 +76,16 @@ ActiveRecord::Schema.define(version: 20160924202350) do
     t.datetime "last_logout_at"
     t.datetime "last_activity_at"
     t.string   "last_login_from_ip_address"
-    t.string   "name",                                        null: false
-    t.integer  "role",                            default: 1, null: false
+    t.string   "name",                                                   null: false
+    t.integer  "role",                            default: 1,            null: false
     t.string   "avatar"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip_code"
+    t.date     "birthday",                        default: '1980-01-01', null: false
+    t.integer  "gender",                          default: 1,            null: false
+    t.string   "custom_gender"
+    t.integer  "pronouns"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -20,6 +20,13 @@
 #  name                            :string           not null
 #  role                            :integer          default(1), not null
 #  avatar                          :string
+#  city                            :string
+#  state                           :string
+#  zip_code                        :integer
+#  birthday                        :date             default(Tue, 01 Jan 1980), not null
+#  gender                          :integer          default(1), not null
+#  custom_gender                   :string
+#  pronouns                        :integer
 #
 # Indexes
 #
@@ -33,20 +40,39 @@ class User < ActiveRecord::Base
   include PgSearch
   authenticates_with_sorcery!
   
+  # A module that holds postal abbreviation helper methods
+  extend PostalAbbreviations
+  
   has_many :trips
   has_many :businesses
   has_many :redemptions
   
   validates :email, uniqueness: true, presence: true
   
-  validates :password, length: { minimum: 8 }
-  validates :password, confirmation: true
-  validates :password_confirmation, presence: true
+  validates :password, length: { minimum: 8 }, if: :validate_password?
+  validates :password, confirmation: true, if: :validate_password?
+  validates :password_confirmation, presence: true, if: :validate_password?
   
   validates :name, presence: true
   
   validates :role, presence: true
   enum role: { user: 1, business_admin: 2, admin: 3 }
+  
+  validates :city, presence: true
+  validates :state, presence: true
+  validates :state, inclusion: { in: User.postal_abbreviations }
+  
+  validates :zip_code, length: { is: 5, message: "must be 5 and only 5 digits" }, unless: "zip_code.blank?"
+  validates :zip_code, numericality: { only_integer: true, message: "must have only numbers; no punctuation or letters" }, unless: "zip_code.blank?"
+  
+  # Our gender options are at least as inclusive as Facebook
+  validates :gender, presence: true
+  enum gender: { male: 1, female: 2, undisclosed: 3, custom: 4 }
+  validates :custom_gender, presence: true, if: "gender == 4"
+  enum pronouns: { masculine: 1, feminine: 2, neutral: 3 }
+  validates :pronouns, presence: true, if: "gender == 4"
+  
+  validates :birthday, presence: true
   
   pg_search_scope :search_by_email,
                   against: :email,
@@ -56,4 +82,10 @@ class User < ActiveRecord::Base
   
   # Users can friend each other
   has_and_belongs_to_many :users
+  
+  private
+
+    def validate_password?
+      new_record? || password.present?
+    end
 end

@@ -20,6 +20,13 @@
 #  name                            :string           not null
 #  role                            :integer          default(1), not null
 #  avatar                          :string
+#  city                            :string
+#  state                           :string
+#  zip_code                        :integer
+#  birthday                        :date             default(Tue, 01 Jan 1980), not null
+#  gender                          :integer          default(1), not null
+#  custom_gender                   :string
+#  pronouns                        :integer
 #
 # Indexes
 #
