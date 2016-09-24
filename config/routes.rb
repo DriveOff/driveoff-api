@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
   
-  resources :users, only: [:index, :show, :create, :update, :destroy] do
-    resources :trips, only: [:index, :show, :create, :update, :destroy]
-    resources :redemptions, only: [:index, :show, :create, :update, :destroy]
-  end
+  constraints format: :json do
+    resources :users, only: [:index, :show, :create, :update, :destroy], defaults: { format: 'json' } do
+      resources :trips, only: [:index, :show, :create, :update, :destroy], defaults: { format: 'json' }
+      resources :redemptions, only: [:index, :show, :create, :update, :destroy], defaults: { format: 'json' }
+    end
   
-  resources :businesses, only: [:index, :show, :create, :update, :destroy]
-  resources :rewards, only: [:index, :show, :create, :update, :destroy]
-  delete 'logout' => 'user_sessions#destroy', :as => :logout
+    resources :businesses, only: [:index, :show, :create, :update, :destroy], defaults: { format: 'json' }
+    resources :rewards, only: [:index, :show, :create, :update, :destroy], defaults: { format: 'json' }
+    delete 'logout' => 'user_sessions#destroy', :as => :logout, defaults: { format: 'json' }
+  end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

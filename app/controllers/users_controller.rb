@@ -3,11 +3,9 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
-    render json: @users, only: [:id, :email, :name, :created_at, :role, :avatar, :city, :state, :zip_code, :gender, :custom_gender, :pronouns]
   end
   
   def show
-    render json: @user, only: [:id, :email, :name, :created_at, :role, :avatar, :city, :state, :zip_code, :gender, :custom_gender, :pronouns]
   end
 
   def create
