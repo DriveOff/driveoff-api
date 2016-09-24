@@ -2,9 +2,11 @@
 #
 # Table name: businesses
 #
-#  id      :integer          not null, primary key
-#  user_id :integer
-#  name    :string           not null
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  name       :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 # Indexes
 #

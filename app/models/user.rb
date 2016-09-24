@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   
   has_many :trips
   has_many :businesses
+  has_many :redemptions
   
   validates :email, uniqueness: true, presence: true
   

@@ -7,6 +7,8 @@
 #  title       :string           not null
 #  description :text
 #  cost        :integer          not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 # Indexes
 #
@@ -15,6 +17,7 @@
 
 class Reward < ActiveRecord::Base
   belongs_to :business
+  has_many :redemptions
   
   validates :title, presence: true
   validates :cost, presence: true
