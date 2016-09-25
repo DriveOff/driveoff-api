@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160924213301) do
+ActiveRecord::Schema.define(version: 20160925001931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,16 +47,12 @@ ActiveRecord::Schema.define(version: 20160924213301) do
   add_index "rewards", ["business_id"], name: "index_rewards_on_business_id", using: :btree
 
   create_table "trips", force: :cascade do |t|
-    t.decimal  "start_lat",  precision: 10, scale: 6,             null: false
-    t.decimal  "start_lng",  precision: 10, scale: 6,             null: false
-    t.decimal  "end_lat",    precision: 10, scale: 6,             null: false
-    t.decimal  "end_lng",    precision: 10, scale: 6,             null: false
-    t.integer  "distance",                            default: 0, null: false
-    t.integer  "time",                                default: 0, null: false
-    t.integer  "points",                              default: 0, null: false
+    t.decimal  "distance",   precision: 6, scale: 1, default: 0.0, null: false
+    t.integer  "time",                               default: 0,   null: false
+    t.integer  "points",                             default: 0,   null: false
     t.integer  "user_id"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
   end
 
   add_index "trips", ["user_id"], name: "index_trips_on_user_id", using: :btree
