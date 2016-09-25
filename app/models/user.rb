@@ -95,7 +95,20 @@ class User < ActiveRecord::Base
   # Calculates the user's points
   # TODO: Probably store this number in the database to reduce queries
   def points
-    (Trip.where(user: self).sum(:points)) - (Redemption.where(user: self).includes(:reward).sum(:cost))
+    Trip.where(user: self).sum(:points)
+  end
+  
+  # Calculates the user's points left over after claiming rewards
+  # TODO: Probably store this number in the database to reduce queries
+  def spendable_points
+    points - (Redemption.where(user: self).includes(:reward).sum(:cost))
+  end
+  
+  # Calculates the user's points from the past week
+  # TODO: Probably store this number in the database to reduce queries
+  def points_this_week
+    now = Time.now.utc.to_date
+    Trip.where(user: self, created_at: (now-7).beginning_of_day..now.end_of_day).sum(:points)
   end
   
   # Add the user as a business admin on a business

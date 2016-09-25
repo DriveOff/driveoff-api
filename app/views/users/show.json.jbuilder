@@ -2,6 +2,8 @@ json.id               @user.id
 json.email            @user.email
 json.name             @user.name
 json.points           @user.points
+json.spendable_points @user.spendable_points
+json.points_this_week @user.points_this_week
 json.created_at       @user.created_at
 json.role             @user.role
 json.avatar           @user.avatar
