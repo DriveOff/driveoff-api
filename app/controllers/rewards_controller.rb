@@ -13,40 +13,29 @@ class RewardsController < ApplicationController
   def create
     @reward = Reward.new(reward_params)
 
-    respond_to do |format|
-      if @reward.save
-        format.html { redirect_to @reward, notice: 'Reward was successfully created.' }
-        format.json { render :show, status: :created, location: @reward }
-      else
-        format.html { render :new }
-        format.json { render json: @reward.errors, status: :unprocessable_entity }
-      end
+    if @reward.save
+      render :show, status: :created, location: @reward
+    else
+      render json: @reward.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    respond_to do |format|
-      if @reward.update(reward_params)
-        format.html { redirect_to @reward, notice: 'Reward was successfully updated.' }
-        format.json { render :show, status: :ok, location: @reward }
-      else
-        format.html { render :edit }
-        format.json { render json: @reward.errors, status: :unprocessable_entity }
-      end
+    if @reward.update(reward_params)
+      render :show, status: :ok, location: @reward
+    else
+      render json: @reward.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
     @reward.destroy
-    respond_to do |format|
-      format.html { redirect_to rewards_url, notice: 'Reward was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
     def set_reward
-      @reward = Reward.find_by_id(params[:id])
+      @reward = Reward.find_by_id(params[:id]) || raise_404
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

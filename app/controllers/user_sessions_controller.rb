@@ -1,15 +1,14 @@
 class UserSessionsController < ApplicationController
   def create
     if @user = login(params[:email], params[:password], params[:remember])
-      redirect_back_or_to(:root, notice: 'Login successful')
+      render :show, status: :created, location: @user
     else
-      flash.now[:alert] = 'Login failed'
-      render action: 'new'
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
     logout
-    redirect_to(:root, notice: 'Logged out')
+    head :no_content
   end
 end

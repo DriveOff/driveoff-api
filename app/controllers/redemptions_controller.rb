@@ -14,45 +14,34 @@ class RedemptionsController < ApplicationController
   def create
     @redemption = Redemption.new(redemption_params)
 
-    respond_to do |format|
-      if @redemption.save
-        format.html { redirect_to @redemption, notice: 'Redemption was successfully created.' }
-        format.json { render :show, status: :created, location: @redemption }
-      else
-        format.html { render :new }
-        format.json { render json: @redemption.errors, status: :unprocessable_entity }
-      end
+    if @redemption.save
+      render :show, status: :created, location: @redemption
+    else
+      render json: @redemption.errors, status: :unprocessable_entity
     end
   end
   
   def update
-    respond_to do |format|
-      if @redemption.update(redemption_params)
-        format.html { redirect_to @redemption, notice: 'Redemption was successfully updated.' }
-        format.json { render :show, status: :ok, location: @redemption }
-      else
-        format.html { render :edit }
-        format.json { render json: @redemption.errors, status: :unprocessable_entity }
-      end
+    if @redemption.update(redemption_params)
+      render :show, status: :ok, location: @redemption
+    else
+      render json: @redemption.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
     @redemption.destroy
-    respond_to do |format|
-      format.html { redirect_to redemptions_url, notice: 'Redemption was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
   
     def set_redemption
-      @redemption = Redemption.find_by_id(params[:id])
+      @redemption = Redemption.find_by_id(params[:id]) || raise_404
     end
   
     def set_user
-      @user = User.find_by_id(params[:user_id])
+      @user = User.find_by_id(params[:user_id]) || raise_404
     end
 
     def redemption_params

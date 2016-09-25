@@ -13,40 +13,29 @@ class BusinessesController < ApplicationController
   def create
     @business = Business.new(business_params)
 
-    respond_to do |format|
-      if @business.save
-        format.html { redirect_to @business, notice: 'Business was successfully created.' }
-        format.json { render :show, status: :created, location: @business }
-      else
-        format.html { render :new }
-        format.json { render json: @business.errors, status: :unprocessable_entity }
-      end
+    if @business.save
+      render :show, status: :created, location: @business
+    else
+      render json: @business.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    respond_to do |format|
-      if @business.update(business_params)
-        format.html { redirect_to @business, notice: 'Business was successfully updated.' }
-        format.json { render :show, status: :ok, location: @business }
-      else
-        format.html { render :edit }
-        format.json { render json: @business.errors, status: :unprocessable_entity }
-      end
+    if @business.update(business_params)
+      render :show, status: :ok, location: @business
+    else
+      render json: @business.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
     @business.destroy
-    respond_to do |format|
-      format.html { redirect_to businesses_url, notice: 'Business was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
     def set_business
-      @business = Business.find_by_id(params[:id])
+      @business = Business.find_by_id(params[:id]) || raise_404
     end
 
     def business_params
