@@ -2,6 +2,7 @@ json.array!(@friends) do |user|
   json.id               user.id
   json.email            user.email
   json.name             user.name
+  json.points           user.points
   json.created_at       user.created_at
   json.role             user.role
   json.avatar           user.avatar

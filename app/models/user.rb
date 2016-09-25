@@ -92,6 +92,12 @@ class User < ActiveRecord::Base
     now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
   end
   
+  # Calculates the user's points
+  # TODO: Probably store this number in the database to reduce queries
+  def points
+    (Trip.where(user: self).sum(:points)) - (Redemption.where(user: self).includes(:reward).sum(:cost))
+  end
+  
   # Add the user as a business admin on a business
   def add_business(business)
     # Admins can't be businesses admins, they already have ultimate power
