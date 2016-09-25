@@ -92,6 +92,17 @@ class User < ActiveRecord::Base
     now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
   end
   
+  # Add the user as a business admin on a business
+  def add_business(business)
+    # Admins can't be businesses admins, they already have ultimate power
+    return false if admin?
+    
+    businesses << business
+    self.update(role: :merchant)
+    
+    businesses.include? business
+  end
+  
   private
 
     def validate_password?

@@ -15,6 +15,7 @@
 
 class Business < ActiveRecord::Base
   belongs_to :user
+  has_many :rewards
   
   validates :user, presence: true
   validates :name, presence: true

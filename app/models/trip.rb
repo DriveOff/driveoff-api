@@ -23,6 +23,13 @@ class Trip < ActiveRecord::Base
   validates :points, presence: true
   validates :user, presence: true
   
+  # Our points algorithm is the user earns 1 point per 5 minutes they
+  # were driving, rounded down
+  before_create :calculate_points
+  def calculate_points
+    self.points = time / 5
+  end
+  
   # Someday we will maybe store distance in meters and we'll want to convert it
   # to miles.
   # def distance_in_miles
