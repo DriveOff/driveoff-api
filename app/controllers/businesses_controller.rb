@@ -3,11 +3,9 @@ class BusinessesController < ApplicationController
 
   def index
     @businesses = Business.all
-    render json: @businesses
   end
 
   def show
-    render json: @business
   end
 
   def create

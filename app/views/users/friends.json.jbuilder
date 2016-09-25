@@ -5,9 +5,8 @@ json.array!(@friends) do |user|
   json.points           user.points
   json.spendable_points user.spendable_points
   json.points_this_week user.points_this_week
-  json.created_at       user.created_at
   json.role             user.role
-  json.avatar           user.avatar
+  json.avatar           (user.avatar? ? user.avatar.default : nil)
   json.city             user.city
   json.state            user.state
   json.zip_code         user.zip_code
@@ -16,4 +15,5 @@ json.array!(@friends) do |user|
   json.gender           user.gender
   json.custom_gender    user.custom_gender
   json.pronouns         user.pronouns
+  json.created_at       user.created_at
 end

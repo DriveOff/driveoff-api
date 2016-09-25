@@ -18,6 +18,8 @@ class Redemption < ActiveRecord::Base
   belongs_to :user
   belongs_to :reward
   
+  delegate :business, to: :reward
+  
   validates :user, presence: true
   validates :reward, presence: true
   

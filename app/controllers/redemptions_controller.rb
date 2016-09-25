@@ -4,11 +4,9 @@ class RedemptionsController < ApplicationController
 
   def index
     @redemptions = @user.redemptions
-    render json: @redemptions
   end
 
   def show
-    render json: @redemption
   end
 
   def create

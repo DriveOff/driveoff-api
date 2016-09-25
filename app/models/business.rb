@@ -7,6 +7,7 @@
 #  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  logo       :string
 #
 # Indexes
 #
@@ -16,6 +17,8 @@
 class Business < ActiveRecord::Base
   belongs_to :user
   has_many :rewards
+  
+  mount_uploader :logo, LogoUploader
   
   validates :user, presence: true
   validates :name, presence: true

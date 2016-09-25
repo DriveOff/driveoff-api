@@ -43,6 +43,8 @@ class User < ActiveRecord::Base
   # A module that holds postal abbreviation helper methods
   extend PostalAbbreviations
   
+  mount_uploader :avatar, AvatarUploader
+  
   has_many :trips
   has_many :businesses
   has_many :redemptions

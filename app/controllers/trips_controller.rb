@@ -4,11 +4,9 @@ class TripsController < ApplicationController
 
   def index
     @trips = @user.trips
-    render json: @trips
   end
 
   def show
-    render json: @trip
   end
 
   def create

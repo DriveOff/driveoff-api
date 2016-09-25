@@ -2,12 +2,10 @@ class RewardsController < ApplicationController
   before_action :set_reward, only: [:show, :edit, :update, :destroy]
 
   def index
-    @rewards = Reward.all
-    render json: @rewards
+    @rewards = Reward.all.includes(:business)
   end
 
   def show
-    render json: @reward
   end
 
   def create
