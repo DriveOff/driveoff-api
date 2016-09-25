@@ -52,7 +52,6 @@ unless User.find_by_email("catsinhats@example.com")
     custom_gender: "agender",
     pronouns: :neutral
   )
-  # This user will get a :business_admin role once we add them to a business
 end
 
 unless User.find_by_email("bestdogtoys@example.com")
@@ -68,6 +67,25 @@ unless User.find_by_email("bestdogtoys@example.com")
     birthday: "1979-12-15",
     gender: :undisclosed
   )
+end
+
+# Make friends
+user1 = User.find_by_email("user@example.com")
+user2 = User.find_by_email("admin@example.com")
+user3 = User.find_by_email("catsinhats@example.com")
+user4 = User.find_by_email("bestdogtoys@example.com")
+
+unless user1.friends.count > 0
+  user1.add_friend(user2)
+  user1.add_friend(user3)
+end
+
+unless user2.friends.count > 1
+  user2.add_friend(user4)
+end
+
+unless user3.friends.count > 1
+  user3.add_friend(user4)
 end
 
 # Create a business
@@ -87,7 +105,7 @@ end
 
 # Create rewards
 business = Business.find_by_name("Cats in Hats")
-if business.rewards.count == 0
+unless business.rewards.count > 0
   Reward.create!(
     business: business,
     title: "Free Cat Hat",
@@ -97,7 +115,7 @@ if business.rewards.count == 0
 end
 
 business2 = Business.find_by_name("Best Dog Toys")
-if business2.rewards.count == 0
+unless business2.rewards.count > 0
   Reward.create!(
     business: business2,
     title: "Free Dog Rope Toy",
