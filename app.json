@@ -3,6 +3,18 @@
   "scripts": {
   },
   "env": {
+    "AWS_ID": {
+      "required": true
+    },
+    "AWS_REGION": {
+      "required": true
+    },
+    "AWS_SECRET": {
+      "required": true
+    },
+    "S3_BUCKET": {
+      "required": true
+    },
   },
   "formation": {
   },
