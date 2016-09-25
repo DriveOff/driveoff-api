@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
                   }
   
   # Users can friend each other
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users, join_table: :user_connections, foreign_key: :user_1_id, association_foreign_key: :user_2_id
   
   # Calculates the user's age based on their birthday
   def age
@@ -101,6 +101,24 @@ class User < ActiveRecord::Base
     self.update(role: :merchant)
     
     businesses.include? business
+  end
+  
+  # Alias for a user's users
+  def friends
+    users
+  end
+  
+  # Adds a friend
+  def add_friend(user2)
+    # We add it twice so we can query either user and see their friends
+    friends << user2
+    user2.friends << self
+  end
+  
+  # Removes a friend
+  def remove_friend(user2)
+    friends.delete(user2)
+    user2.friends.delete(self)
   end
   
   private

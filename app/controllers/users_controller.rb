@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :friends, :add_friend, :destroy]
   
   def index
     @users = User.all
@@ -27,6 +27,22 @@ class UsersController < ApplicationController
       render json: @user.errors, status: :unprocessable_entity
     end
   end
+  
+  def friends
+    @friends = @user.friends
+  end
+  
+  def add_friend
+    @user2 = User.find_by_id(params[:id2]) || raise_404
+    @user.add_friend(@user2)
+    render json: @user, status: :ok
+  end
+  
+  def remove_friend
+    @user2 = User.find_by_id(params[:id2]) || raise_404
+    @user.remove_friend(@user2)
+    render json: @user, status: :ok
+  end
 
   def destroy
     @user.destroy
@@ -38,7 +54,6 @@ class UsersController < ApplicationController
     def set_user
       @user = User.find_by_id(params[:id]) || raise_404
     end
-
 
     def user_params
       params.fetch(:user, {}).permit(:email, :password, :password_confirmation, :name, :role, :avatar, :city, :state, :zip_code, :gender, :custom_gender, :pronouns)

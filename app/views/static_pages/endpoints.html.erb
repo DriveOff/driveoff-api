@@ -8,6 +8,7 @@
     <ul>
       <li><%= link_to "Users index", :users %></li>
       <li><%= link_to "User show", user_path(User.first) %></li>
+      <li><%= link_to "Friends index", user_friends_path(User.first) %></li>
     </ul>
   </li>
   <li>Businesses
