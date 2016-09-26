@@ -37,4 +37,4 @@ AWS_REGION=your_aws_region_name_here
 - **Reward**: An item that a user can claim with their points. Belongs to a business.
 - **Redemption**: A record of a user's claimed reward. Belongs to the user and the reward, and also belongs to a business but indirectly (through the reward).
 
-Models have handy annotations(https://github.com/ctran/annotate_models) describing all their columns, which update every time you run `rake db:migrate`.
+Models have handy [annotations](https://github.com/ctran/annotate_models) describing all their columns, which update every time you run `rake db:migrate`.
