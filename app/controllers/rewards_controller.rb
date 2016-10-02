@@ -2,7 +2,7 @@ class RewardsController < ApplicationController
   before_action :set_reward, only: [:show, :edit, :update, :destroy]
 
   def index
-    @rewards = Reward.all.includes(:business)
+    @rewards = Reward.all.includes(:business).page(params[:page])
   end
 
   def show

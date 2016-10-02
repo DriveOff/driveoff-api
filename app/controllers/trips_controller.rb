@@ -3,7 +3,7 @@ class TripsController < ApplicationController
   before_action :set_user
 
   def index
-    @trips = @user.trips
+    @trips = @user.trips.page(params[:page])
   end
 
   def show

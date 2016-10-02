@@ -3,7 +3,7 @@ class RedemptionsController < ApplicationController
   before_action :set_user
 
   def index
-    @redemptions = @user.redemptions
+    @redemptions = @user.redemptions.page(params[:page])
   end
 
   def show

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :friends, :add_friend, :destroy]
   
   def index
-    @users = User.all
+    @users = User.all.page(params[:page])
   end
   
   def show
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   end
   
   def friends
-    @friends = @user.friends
+    @friends = @user.friends.page(params[:page])
   end
   
   def add_friend
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   end
   
   def search
-    @users = User.search_by_email(params[:query])
+    @users = User.search_by_email(params[:query]).page(params[:page])
   end
 
   private
