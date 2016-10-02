@@ -131,15 +131,25 @@ class User < ActiveRecord::Base
   
   # Adds a friend
   def add_friend(user2)
+    # Don't let friends be double-friends
+    return false if friends.include?(user2)
+    
     # We add it twice so we can query either user and see their friends
     friends << user2
     user2.friends << self
+    
+    true
   end
   
   # Removes a friend
   def remove_friend(user2)
+    # Skip if the users aren't friends
+    return false if !friends.include?(user2)
+    
     friends.delete(user2)
     user2.friends.delete(self)
+    
+    true
   end
   
   private
