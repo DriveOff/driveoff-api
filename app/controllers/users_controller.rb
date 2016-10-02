@@ -48,6 +48,10 @@ class UsersController < ApplicationController
     @user.destroy
     head :no_content
   end
+  
+  def search
+    @users = User.search_by_email(params[:query])
+  end
 
   private
   

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/endpoints' => 'static_pages#endpoints', as: :endpoints
   
   constraints format: :json do
+    get '/users/search' => 'users#search', as: :users_search, defaults: { format: 'json' }
     resources :users, only: [:index, :show, :create, :update, :destroy], defaults: { format: 'json' } do
       resources :trips, only: [:index, :show, :create, :update, :destroy], defaults: { format: 'json' }
       resources :redemptions, only: [:index, :show, :create, :update, :destroy], defaults: { format: 'json' }
