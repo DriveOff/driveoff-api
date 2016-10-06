@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   
     resources :businesses, only: [:index, :show, :create, :update, :destroy], defaults: { format: 'json' }
     resources :rewards, only: [:index, :show, :create, :update, :destroy], defaults: { format: 'json' }
+    
+    post 'login' => 'user_sessions#create', :as => :login, defaults: { format: 'json' }
     delete 'logout' => 'user_sessions#destroy', :as => :logout, defaults: { format: 'json' }
   end
 end

@@ -15,7 +15,7 @@ class RedemptionsController < ApplicationController
     if @redemption.save
       render :show, status: :created, location: @redemption
     else
-      render json: @redemption.errors, status: :unprocessable_entity
+      render json: { errors: @redemption.errors.full_messages, status: :unprocessable_entity }
     end
   end
   
@@ -23,7 +23,7 @@ class RedemptionsController < ApplicationController
     if @redemption.update(redemption_params)
       render :show, status: :ok, location: @redemption
     else
-      render json: @redemption.errors, status: :unprocessable_entity
+      render json: { errors: @redemption.errors.full_messages, status: :unprocessable_entity }
     end
   end
 
