@@ -25,5 +25,14 @@ module Driveoff
     
     # Raise error when unpermitted params are submitted
     config.action_controller.action_on_unpermitted_parameters = :raise
+
+    #CORS middleware
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
+
   end
 end
