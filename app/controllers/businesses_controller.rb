@@ -14,7 +14,7 @@ class BusinessesController < ApplicationController
     if @business.save
       render :show, status: :created, location: @business
     else
-      render json: @business.errors, status: :unprocessable_entity
+      render json: { errors: @business.errors.full_messages, status: :unprocessable_entity }
     end
   end
 
@@ -22,7 +22,7 @@ class BusinessesController < ApplicationController
     if @business.update(business_params)
       render :show, status: :ok, location: @business
     else
-      render json: @business.errors, status: :unprocessable_entity
+      render json: { errors: @business.errors.full_messages, status: :unprocessable_entity }
     end
   end
 

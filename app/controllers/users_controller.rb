@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       
       render :show, status: :created, location: @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: { errors: @user.errors.full_messages, status: :unprocessable_entity }
     end
   end
 
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       render :show, status: :ok, location: @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: { errors: @user.errors.full_messages, status: :unprocessable_entity }
     end
   end
   

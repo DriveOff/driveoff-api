@@ -15,7 +15,7 @@ class TripsController < ApplicationController
     if @trip.save
       render :show, status: :created, location: @trip
     else
-      render json: @trip.errors, status: :unprocessable_entity
+      render json: { errors: @trip.errors.full_messages, status: :unprocessable_entity }
     end
   end
 
@@ -23,7 +23,7 @@ class TripsController < ApplicationController
     if @trip.update(trip_params)
       render :show, status: :ok, location: @trip
     else
-      render json: @trip.errors, status: :unprocessable_entity
+      render json: { errors: @trip.errors.full_messages, status: :unprocessable_entity }
     end
   end
 

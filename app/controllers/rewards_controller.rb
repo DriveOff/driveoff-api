@@ -14,7 +14,7 @@ class RewardsController < ApplicationController
     if @reward.save
       render :show, status: :created, location: @reward
     else
-      render json: @reward.errors, status: :unprocessable_entity
+      render json: { errors: @reward.errors.full_messages, status: :unprocessable_entity }
     end
   end
 
@@ -22,7 +22,7 @@ class RewardsController < ApplicationController
     if @reward.update(reward_params)
       render :show, status: :ok, location: @reward
     else
-      render json: @reward.errors, status: :unprocessable_entity
+      render json: { errors: @reward.errors.full_messages, status: :unprocessable_entity }
     end
   end
 
