@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :friends, :add_friend, :destroy]
+  before_action :set_and_authorize_user, only: [:show, :update, :friends, :add_friend, :remove_friend, :destroy]
   
   def index
+    authorize User
     @users = User.all.page(params[:page])
   end
   
@@ -9,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    authorize User
     @user = User.new(user_params)
 
     if @user.save
@@ -50,13 +52,15 @@ class UsersController < ApplicationController
   end
   
   def search
+    authorize User
     @users = User.search_by_email(params[:query]).page(params[:page])
   end
 
   private
   
-    def set_user
+    def set_and_authorize_user
       @user = User.find_by_id(params[:id]) || raise_404
+      authorize @user
     end
 
     def user_params

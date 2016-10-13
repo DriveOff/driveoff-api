@@ -7,7 +7,7 @@ This application is the API that provides information to the front-end site.
 ## Local Installation and Setup
 
 - You'll need Rails 4.2.7 and Ruby 2.3.1.
-- You'll need ImageMagick installed (With Homebrew: `brew install imagemagick`)
+- You'll need ImageMagick installed (with Homebrew: `brew install imagemagick`)
 - After you have cloned this repo:
   - `bundle` all the gems.
   - create your database: `rake db:create db:migrate`
