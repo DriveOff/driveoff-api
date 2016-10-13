@@ -21,6 +21,8 @@ module Driveoff
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
+
+
     config.active_record.raise_in_transactional_callbacks = true
     
     # Raise error when unpermitted params are submitted
@@ -33,6 +35,8 @@ module Driveoff
         resource '*', :headers => :any, :methods => [:get, :post, :options]
       end
     end
+
+    config.middleware.use ActionDispatch::Session::CookieStore
 
   end
 end

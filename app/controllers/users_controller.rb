@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    represent_user_with_token(@user)
     if @user.save
       auto_login(@user)
       
@@ -54,7 +54,11 @@ class UsersController < ApplicationController
   end
 
   private
-  
+    def represent_user_with_token(user)
+      user.as_json(only: [:id, :email]).merge(token: ::TokenProvider.issue_token(
+      user_id: user.id
+      ))
+    end
     def set_user
       @user = User.find_by_id(params[:id]) || raise_404
     end
