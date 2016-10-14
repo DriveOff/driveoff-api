@@ -27,9 +27,12 @@
 #  gender                          :integer          default(1), not null
 #  custom_gender                   :string
 #  pronouns                        :integer
+#  authentication_token            :string
+#  authentication_token_expires_at :datetime
 #
 # Indexes
 #
+#  index_users_on_authentication_token                 (authentication_token)
 #  index_users_on_email                                (email) UNIQUE
 #  index_users_on_last_logout_at_and_last_activity_at  (last_logout_at,last_activity_at)
 #  index_users_on_remember_me_token                    (remember_me_token)

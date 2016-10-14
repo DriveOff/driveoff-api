@@ -20,4 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  pundit:
+    default: "You're not authorized to perform this action."
+    user_policy:
+      index?: "You're not allowed to view all users."
+      show?: "You're not allowed to view this user."
+      update?: "You're not allowed to edit this user."
+      friends?: "You're not allowed to view this user's friends."
+      add_friend?: "You're not allowed to edit this user."
+      remove_friend?: "You're not allowed to edit this user."
+      destroy?: "You're not allowed to delete this user."
+      search?: "You're not allowed to search for users."

@@ -27,9 +27,12 @@
 #  gender                          :integer          default(1), not null
 #  custom_gender                   :string
 #  pronouns                        :integer
+#  authentication_token            :string
+#  authentication_token_expires_at :datetime
 #
 # Indexes
 #
+#  index_users_on_authentication_token                 (authentication_token)
 #  index_users_on_email                                (email) UNIQUE
 #  index_users_on_last_logout_at_and_last_activity_at  (last_logout_at,last_activity_at)
 #  index_users_on_remember_me_token                    (remember_me_token)
@@ -84,6 +87,30 @@ class User < ActiveRecord::Base
   
   # Users can friend each other
   has_and_belongs_to_many :users, join_table: :user_connections, foreign_key: :user_1_id, association_foreign_key: :user_2_id
+  
+  # Generates an authentication token
+  def generate_authentication_token
+    if !authentication_token || Time.now > authentication_token_expires_at
+      loop do
+        new_authentication_token = SecureRandom.base64(64)
+        
+        unless User.find_by(authentication_token: new_authentication_token)
+          self.update({
+            authentication_token: new_authentication_token,
+            authentication_token_expires_at: Time.now + 2.weeks
+          })
+          break
+        end
+      end
+    end
+  end
+  
+  # This method is triggered as the user continues to browse the site, to
+  # extend the time that their token is valid. Basically the token will only
+  # become invalid if the user is completely inactive for X amount of time.
+  def extend_authentication_token_expiration
+    self.update({ authentication_token_expires_at: Time.now + 2.weeks })
+  end
   
   # Calculates the user's age based on their birthday
   def age
