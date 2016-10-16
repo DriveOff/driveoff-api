@@ -52,4 +52,9 @@ class UserPolicy < ApplicationPolicy
   def trips_index?
     user && (user == record || user.admin?)
   end
+  
+  # The user can only look at their own redemptions or they're an admin
+  def redemptions_index?
+    trips_index?
+  end
 end

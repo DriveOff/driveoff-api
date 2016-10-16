@@ -11,6 +11,7 @@ class RewardsController < ApplicationController
 
   def create
     @reward = Reward.new(reward_params)
+    authorize @reward
 
     if @reward.save
       render :show, status: :created, location: @reward

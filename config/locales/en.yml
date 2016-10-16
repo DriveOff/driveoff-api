@@ -28,6 +28,11 @@ en:
       create?: "You're not allowed to create a business."
       update?: "You're not allowed to edit this business."
       destroy?: "You're not allowed to delete this business."
+    redemption_policy:
+      show?: "You're not allowed to view this redemption."
+      create?: "You're not allowed to create a redemption."
+      update?: "You're not allowed to edit this redemption"
+      destroy?: "You're not allowed to delete this redemption."
     reward_policy:
       index?: "You're not allowed to view rewards."
       show?: "You're not allowed to view this reward."
@@ -50,3 +55,4 @@ en:
       destroy?: "You're not allowed to delete this user."
       search?: "You're not allowed to search for users."
       trips_index?: "You're not allowed to view this user's trips."
+      redemptions_index?: "You're not allowed to view this user's redemptions."

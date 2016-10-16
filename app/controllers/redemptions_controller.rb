@@ -1,8 +1,9 @@
 class RedemptionsController < ApplicationController
-  before_action :set_redemption, only: [:show, :edit, :update, :destroy]
+  before_action :set_and_authorize_redemption, only: [:show, :edit, :update, :destroy]
   before_action :set_user
 
   def index
+    authorize @user, :redemptions_index?
     @redemptions = @user.redemptions.page(params[:page])
   end
 
@@ -11,6 +12,7 @@ class RedemptionsController < ApplicationController
 
   def create
     @redemption = Redemption.new(redemption_params)
+    authorize @redemption
 
     if @redemption.save
       render :show, status: :created, location: @redemption
@@ -34,8 +36,9 @@ class RedemptionsController < ApplicationController
 
   private
   
-    def set_redemption
+    def set_and_authorize_redemption
       @redemption = Redemption.find_by_id(params[:id]) || raise_404
+      authorize @redemption
     end
   
     def set_user

@@ -4,16 +4,18 @@ class TripPolicy < ApplicationPolicy
     user && (user == record.user || user.admin?)
   end
   
-  # The rest of these policys are the same as "show?"
+  # Same as "show?"
   def create?
     show?
   end
-
+  
+  # Only an admin can update a trip
   def update?
-    show?
+    user && user.admin?
   end
-
+  
+  # Only an admin can destroy a trip
   def destroy?
-    show?
+    update?
   end
 end
