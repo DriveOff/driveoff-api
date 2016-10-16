@@ -9,9 +9,9 @@ class UserPolicy < ApplicationPolicy
     user
   end
   
-  # Anyone can create a user
+  # Only logged out users and admins can create users
   def create?
-    true
+    !user || (user && user.admin?)
   end
   
   # The user has to either be updating their own record or they're an admin
@@ -19,22 +19,22 @@ class UserPolicy < ApplicationPolicy
     user && (user == record || user.admin?)
   end
   
-  # The user has to either be looking at their own friends or they're an admin
+  # Must be a logged in user
   def friends?
+    user
+  end
+  
+  # The user must be adding friends for themselves or they're an admin
+  def add_friend?
     user && (user == record || user.admin?)
   end
   
-  # Same authorization as "friends?"
-  def add_friend?
-    friends?
-  end
-  
-  # Same authorization as "friends?"
+  # Same authorization as "add_friend?"
   def remove_friend?
-    friends?
+    add_friend?
   end
   
-  # The user has to either be updating their own record or they're an admin
+  # The user has to either be deleting their own record or they're an admin
   def destroy?
     user && (user == record || user.admin?)
   end
