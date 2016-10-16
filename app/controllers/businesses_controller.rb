@@ -1,7 +1,8 @@
 class BusinessesController < ApplicationController
-  before_action :set_business, only: [:show, :edit, :update, :destroy]
+  before_action :set_and_authorize_business, only: [:show, :edit, :update, :destroy]
 
   def index
+    authorize Business
     @businesses = Business.all.page(params[:page])
   end
 
@@ -32,8 +33,9 @@ class BusinessesController < ApplicationController
   end
 
   private
-    def set_business
+    def set_and_authorize_business
       @business = Business.find_by_id(params[:id]) || raise_404
+      authorize @business
     end
 
     def business_params
