@@ -1,7 +1,8 @@
 class RewardsController < ApplicationController
-  before_action :set_reward, only: [:show, :edit, :update, :destroy]
+  before_action :set_and_authorize_reward, only: [:show, :edit, :update, :destroy]
 
   def index
+    authorize Reward
     @rewards = Reward.all.includes(:business).page(params[:page])
   end
 
@@ -34,6 +35,7 @@ class RewardsController < ApplicationController
   private
     def set_reward
       @reward = Reward.find_by_id(params[:id]) || raise_404
+      authorize @reward
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

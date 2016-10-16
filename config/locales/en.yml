@@ -28,6 +28,12 @@ en:
       create?: "You're not allowed to create a business."
       update?: "You're not allowed to edit this business."
       destroy?: "You're not allowed to delete this business."
+    reward_policy:
+      index?: "You're not allowed to view rewards."
+      show?: "You're not allowed to view this reward."
+      create?: "You're not allowed to create a reward."
+      update?: "You're not allowed to edit this reward."
+      destroy?: "You're not allowed to delete this reward."
     trip_policy:
       show?: "You're not allowed to view this trip."
       create?: "You're not allowed to create a trip."
