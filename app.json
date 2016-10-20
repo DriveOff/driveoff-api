@@ -1,0 +1,33 @@
+{
+  "name": "driveoff",
+  "scripts": {
+  },
+  "env": {
+    "AWS_ID": {
+      "required": true
+    },
+    "AWS_REGION": {
+      "required": true
+    },
+    "AWS_SECRET": {
+      "required": true
+    },
+    "S3_BUCKET": {
+      "required": true
+    },
+  },
+  "formation": {
+    "web": {
+      "quantity": 2,
+      "size": "free"
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "urn:buildpack:heroku/ruby"
+    }
+  ]
+}
