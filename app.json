@@ -14,7 +14,7 @@
     },
     "S3_BUCKET": {
       "required": true
-    },
+    }
   },
   "formation": {
     "web": {
