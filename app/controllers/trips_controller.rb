@@ -15,7 +15,7 @@ class TripsController < ApplicationController
     authorize @trip
 
     if @trip.save
-      render :show, status: :created, location: @trip
+      render :show, status: :created
     else
       render json: { errors: @trip.errors.full_messages, status: :unprocessable_entity }
     end
@@ -23,7 +23,7 @@ class TripsController < ApplicationController
 
   def update
     if @trip.update(trip_params)
-      render :show, status: :ok, location: @trip
+      render :show, status: :ok
     else
       render json: { errors: @trip.errors.full_messages, status: :unprocessable_entity }
     end
@@ -46,6 +46,6 @@ class TripsController < ApplicationController
     end
 
     def trip_params
-      params.fetch(:trip, {}).permit(:distance, :time, :user_id)
+      params.slice(:distance, :time, :user_id).permit!
     end
 end

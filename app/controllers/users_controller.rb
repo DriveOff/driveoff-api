@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if @user.save
       auto_login(@user)
       
-      render :show, status: :created, location: @user
+      render :show, status: :created
     else
       render json: { errors: @user.errors.full_messages, status: :unprocessable_entity }
     end
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      render :show, status: :ok, location: @user
+      render :show, status: :ok
     else
       render json: { errors: @user.errors.full_messages, status: :unprocessable_entity }
     end
@@ -64,6 +64,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.fetch(:user, {}).permit(:email, :password, :password_confirmation, :name, :role, :avatar, :city, :state, :zip_code, :gender, :custom_gender, :pronouns)
+      params.slice(:email, :password, :password_confirmation, :name, :role, :avatar, :city, :state, :zip_code, :gender, :custom_gender, :pronouns).permit!
     end
 end

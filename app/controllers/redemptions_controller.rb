@@ -1,5 +1,5 @@
 class RedemptionsController < ApplicationController
-  before_action :set_and_authorize_redemption, only: [:show, :edit, :update, :destroy]
+  before_action :set_and_authorize_redemption, only: [:show, :edit, :destroy]
   before_action :set_user
 
   def index
@@ -15,15 +15,7 @@ class RedemptionsController < ApplicationController
     authorize @redemption
 
     if @redemption.save
-      render :show, status: :created, location: @redemption
-    else
-      render json: { errors: @redemption.errors.full_messages, status: :unprocessable_entity }
-    end
-  end
-  
-  def update
-    if @redemption.update(redemption_params)
-      render :show, status: :ok, location: @redemption
+      render :show, status: :created
     else
       render json: { errors: @redemption.errors.full_messages, status: :unprocessable_entity }
     end
@@ -46,6 +38,6 @@ class RedemptionsController < ApplicationController
     end
 
     def redemption_params
-      params.fetch(:redemption, {})
+      params.slice(:reward_id).permit!
     end
 end

@@ -3,7 +3,4 @@ class StaticPagesController < ApplicationController
   
   def home
   end
-  
-  def endpoints
-  end
 end

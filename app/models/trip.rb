@@ -18,8 +18,8 @@
 class Trip < ActiveRecord::Base
   belongs_to :user
   
-  validates :distance, presence: true
-  validates :time, presence: true
+  validates :distance, presence: true # stored in miles
+  validates :time, presence: true     # stored in minutes
   validates :points, presence: true
   validates :user, presence: true
   
