@@ -137,11 +137,12 @@ These routes accept additional parameters. Parameters marked with an asterisk ar
 
 #### Users
 
-##### Search
+##### *Search*
 - **query**: string, for searching through users emails. Matches the start of emails.
+
 `/users/search?query=katie`
 
-##### Create User
+##### *Create User*
 - **email***: string
 - **password***: string
 - **password_confirmation***: string, must match password
@@ -164,74 +165,81 @@ These routes accept additional parameters. Parameters marked with an asterisk ar
   - masculine
   - feminine
   - neutral
+
 `/users?email=user2@example.com&password=yourpassword&password_confirmation=yourpassword&name=John%20Doe&city=Omaha&state=NE&gender=1`
 
-##### Update User
+##### *Update User*
 
 Same as create user, except no fields are required, unless the user is changing their password, then they must also fill out the password_confirmation field.
 
 - **user_id***: integer, the ID of the user being updated
+
 `/users/1?city=Bellevue`
 
-##### Delete User
+##### *Delete User*
 - **user_id***
 
 #### Trips
 
-##### Create Trip
+##### *Create Trip*
 - **user_id***: integer, in the path, the user that owns the trip
 - **distance***: decimal (up to 1 place after the decimal point), the distance traveled in miles
 - **time***: integer, the time traveled in minutes
+
 `/users/1/trips?distance=5.5&time=14`
 
-##### Update Trip
+##### *Update Trip*
 - **user_id***
 - **id***: integer, the ID of the trip being updated
 - **distance**
 - **time**
+
 `/users/1/trips/1?distance=5.5&time=14`
 
-##### Delete Trip
+##### *Delete Trip*
 - **user_id***
 - **id***
 
 #### Businesses
 
-##### Create Business
+##### *Create Business*
 - **name***: string, the name of the business
 - **user\_id**: integer, the user who will be the business\_admin for this business
+
 `/businesses?name=Cats%20In%20Hats&user_id=1`
 
-##### Update Business
+##### *Update Business*
 
 Same as create business, except no fields are required.
 
-##### Delete Business
+##### *Delete Business*
 
 - **id***
 
 #### Rewards
 
-##### Create Reward
+##### *Create Reward*
 - **title*** - string, name of the reward
 - **description*** - text, details about the reward
 - **cost*** - integer, how many points the user must spend to claim the reward
 - **business_id*** - integer, the ID of the business that owns the reward
+
 `rewards?title=One%20Free%20Hat&description=One%20free%20hat%20from%20your%20local%20store&cost=10`
 
-##### Update Reward
+##### *Update Reward*
 
 Same as create reward, except no fields are required.
 
-##### Delete Reward
+##### *Delete Reward*
 - **id***
 
 #### Redemptions
 
-##### Create Redemption
+##### *Create Redemption*
 - **user_id***: integer, in the path, the user that owns the redemption
 - **reward_id***: integer, the ID of the reward from which the redemption was created
+
 `users/1/redemptions?reward_id=1`
 
-##### Destroy Redemption
+##### *Destroy Redemption*
 - **id***
