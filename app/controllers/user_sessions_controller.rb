@@ -1,6 +1,7 @@
 class UserSessionsController < ApplicationController
   def create
     if @user = login(params[:email], params[:password], params[:remember])
+      @user.generate_authentication_token
       render 'users/show', status: :created
     else
       render json: { errors: @user.errors.full_messages, status: :unprocessable_entity }

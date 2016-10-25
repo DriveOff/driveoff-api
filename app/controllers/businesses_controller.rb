@@ -1,7 +1,8 @@
 class BusinessesController < ApplicationController
-  before_action :set_business, only: [:show, :edit, :update, :destroy]
+  before_action :set_and_authorize_business, only: [:show, :edit, :update, :destroy]
 
   def index
+    authorize Business
     @businesses = Business.all.page(params[:page])
   end
 
@@ -12,7 +13,7 @@ class BusinessesController < ApplicationController
     @business = Business.new(business_params)
 
     if @business.save
-      render :show, status: :created, location: @business
+      render :show, status: :created
     else
       render json: { errors: @business.errors.full_messages, status: :unprocessable_entity }
     end
@@ -20,7 +21,7 @@ class BusinessesController < ApplicationController
 
   def update
     if @business.update(business_params)
-      render :show, status: :ok, location: @business
+      render :show, status: :ok
     else
       render json: { errors: @business.errors.full_messages, status: :unprocessable_entity }
     end
@@ -32,11 +33,12 @@ class BusinessesController < ApplicationController
   end
 
   private
-    def set_business
+    def set_and_authorize_business
       @business = Business.find_by_id(params[:id]) || raise_404
+      authorize @business
     end
 
     def business_params
-      params.fetch(:business, {}).permit(:name, :user_id)
+      params.slice(:name, :user_id).permit!
     end
 end

@@ -4,35 +4,27 @@ RSpec.describe RewardsController, type: :routing do
   describe "routing" do
 
     it "routes to #index" do
-      expect(:get => "/rewards").to route_to("rewards#index")
-    end
-
-    it "routes to #new" do
-      expect(:get => "/rewards/new").to route_to("rewards#new")
+      expect(:get => "/rewards").to route_to("rewards#index", format: "json")
     end
 
     it "routes to #show" do
-      expect(:get => "/rewards/1").to route_to("rewards#show", :id => "1")
-    end
-
-    it "routes to #edit" do
-      expect(:get => "/rewards/1/edit").to route_to("rewards#edit", :id => "1")
+      expect(:get => "/rewards/1").to route_to("rewards#show", :id => "1", format: "json")
     end
 
     it "routes to #create" do
-      expect(:post => "/rewards").to route_to("rewards#create")
+      expect(:post => "/rewards").to route_to("rewards#create", format: "json")
     end
 
     it "routes to #update via PUT" do
-      expect(:put => "/rewards/1").to route_to("rewards#update", :id => "1")
+      expect(:put => "/rewards/1").to route_to("rewards#update", :id => "1", format: "json")
     end
 
     it "routes to #update via PATCH" do
-      expect(:patch => "/rewards/1").to route_to("rewards#update", :id => "1")
+      expect(:patch => "/rewards/1").to route_to("rewards#update", :id => "1", format: "json")
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/rewards/1").to route_to("rewards#destroy", :id => "1")
+      expect(:delete => "/rewards/1").to route_to("rewards#destroy", :id => "1", format: "json")
     end
 
   end

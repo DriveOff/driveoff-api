@@ -60,8 +60,7 @@ gem 'carrierwave'
 # brew install imagemagick
 gem 'mini_magick'
 
-
-#handles CORS
+# Handles CORS
 gem 'rack-cors', :require => 'rack/cors'
 
 group :development, :test do

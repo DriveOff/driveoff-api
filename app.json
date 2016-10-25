@@ -14,14 +14,14 @@
     },
     "S3_BUCKET": {
       "required": true
-    },
-  },
-  "formation": {
+    }
   },
   "addons": [
-
+    "heroku-postgresql"
   ],
   "buildpacks": [
-
+    {
+      "url": "urn:buildpack:heroku/ruby"
+    }
   ]
 }

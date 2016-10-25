@@ -1,8 +1,9 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :update, :destroy]
+  before_action :set_and_authorize_trip, only: [:show, :update, :destroy]
   before_action :set_user
 
   def index
+    authorize @user, :trips_index?
     @trips = @user.trips.page(params[:page])
   end
 
@@ -11,9 +12,10 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(trip_params)
+    authorize @trip
 
     if @trip.save
-      render :show, status: :created, location: @trip
+      render :show, status: :created
     else
       render json: { errors: @trip.errors.full_messages, status: :unprocessable_entity }
     end
@@ -21,7 +23,7 @@ class TripsController < ApplicationController
 
   def update
     if @trip.update(trip_params)
-      render :show, status: :ok, location: @trip
+      render :show, status: :ok
     else
       render json: { errors: @trip.errors.full_messages, status: :unprocessable_entity }
     end
@@ -34,8 +36,9 @@ class TripsController < ApplicationController
 
   private
   
-    def set_trip
+    def set_and_authorize_trip
       @trip = Trip.find_by_id(params[:id]) || raise_404
+      authorize @trip
     end
     
     def set_user
@@ -43,6 +46,6 @@ class TripsController < ApplicationController
     end
 
     def trip_params
-      params.fetch(:trip, {}).permit(:distance, :time, :user_id)
+      params.slice(:distance, :time, :user_id).permit!
     end
 end

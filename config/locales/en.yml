@@ -20,4 +20,39 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  pundit:
+    default: "You're not authorized to perform this action."
+    business_policy:
+      index?: "You're not allowed to view all businesses."
+      show?: "You're not allowed to view this business."
+      create?: "You're not allowed to create a business."
+      update?: "You're not allowed to edit this business."
+      destroy?: "You're not allowed to delete this business."
+    redemption_policy:
+      show?: "You're not allowed to view this redemption."
+      create?: "You're not allowed to create a redemption."
+      update?: "You're not allowed to edit this redemption"
+      destroy?: "You're not allowed to delete this redemption."
+    reward_policy:
+      index?: "You're not allowed to view rewards."
+      show?: "You're not allowed to view this reward."
+      create?: "You're not allowed to create a reward."
+      update?: "You're not allowed to edit this reward."
+      destroy?: "You're not allowed to delete this reward."
+    trip_policy:
+      show?: "You're not allowed to view this trip."
+      create?: "You're not allowed to create a trip."
+      update?: "You're not allowed to edit this trip."
+      destroy?: "You're not allowed to delete this trip."
+    user_policy:
+      index?: "You're not allowed to view all users."
+      show?: "You're not allowed to view this user."
+      create?: "You're not allowed to create a user."
+      update?: "You're not allowed to edit this user."
+      friends?: "You're not allowed to view this user's friends."
+      add_friend?: "You're not allowed to edit this user."
+      remove_friend?: "You're not allowed to edit this user."
+      destroy?: "You're not allowed to delete this user."
+      search?: "You're not allowed to search for users."
+      trips_index?: "You're not allowed to view this user's trips."
+      redemptions_index?: "You're not allowed to view this user's redemptions."

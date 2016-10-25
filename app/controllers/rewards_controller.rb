@@ -1,7 +1,8 @@
 class RewardsController < ApplicationController
-  before_action :set_reward, only: [:show, :edit, :update, :destroy]
+  before_action :set_and_authorize_reward, only: [:show, :edit, :update, :destroy]
 
   def index
+    authorize Reward
     @rewards = Reward.all.includes(:business).page(params[:page])
   end
 
@@ -10,9 +11,10 @@ class RewardsController < ApplicationController
 
   def create
     @reward = Reward.new(reward_params)
+    authorize @reward
 
     if @reward.save
-      render :show, status: :created, location: @reward
+      render :show, status: :created
     else
       render json: { errors: @reward.errors.full_messages, status: :unprocessable_entity }
     end
@@ -20,7 +22,7 @@ class RewardsController < ApplicationController
 
   def update
     if @reward.update(reward_params)
-      render :show, status: :ok, location: @reward
+      render :show, status: :ok
     else
       render json: { errors: @reward.errors.full_messages, status: :unprocessable_entity }
     end
@@ -34,10 +36,11 @@ class RewardsController < ApplicationController
   private
     def set_reward
       @reward = Reward.find_by_id(params[:id]) || raise_404
+      authorize @reward
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reward_params
-      params.fetch(:reward, {}).permit(:title, :description, :cost, :business_id)
+      params.slice(:title, :description, :cost, :business_id).permit!
     end
 end
