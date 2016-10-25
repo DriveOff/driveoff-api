@@ -14,7 +14,7 @@ class RewardsController < ApplicationController
     authorize @reward
 
     if @reward.save
-      render :show, status: :created, location: @reward
+      render :show, status: :created
     else
       render json: { errors: @reward.errors.full_messages, status: :unprocessable_entity }
     end
@@ -22,7 +22,7 @@ class RewardsController < ApplicationController
 
   def update
     if @reward.update(reward_params)
-      render :show, status: :ok, location: @reward
+      render :show, status: :ok
     else
       render json: { errors: @reward.errors.full_messages, status: :unprocessable_entity }
     end
@@ -41,6 +41,6 @@ class RewardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reward_params
-      params.fetch(:reward, {}).permit(:title, :description, :cost, :business_id)
+      params.slice(:title, :description, :cost, :business_id).permit!
     end
 end

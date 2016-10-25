@@ -13,7 +13,7 @@ class BusinessesController < ApplicationController
     @business = Business.new(business_params)
 
     if @business.save
-      render :show, status: :created, location: @business
+      render :show, status: :created
     else
       render json: { errors: @business.errors.full_messages, status: :unprocessable_entity }
     end
@@ -21,7 +21,7 @@ class BusinessesController < ApplicationController
 
   def update
     if @business.update(business_params)
-      render :show, status: :ok, location: @business
+      render :show, status: :ok
     else
       render json: { errors: @business.errors.full_messages, status: :unprocessable_entity }
     end
@@ -39,6 +39,6 @@ class BusinessesController < ApplicationController
     end
 
     def business_params
-      params.fetch(:business, {}).permit(:name, :user_id)
+      params.slice(:name, :user_id).permit!
     end
 end

@@ -143,10 +143,10 @@ These routes accept additional parameters. Parameters marked with an asterisk ar
 
 ##### Create User
 - **email***: string
-- **password**: string
+- **password***: string
 - **password_confirmation***: string, must match password
 - **name***: string
-- **role**: string, default is user
+- **role**: string, if not provided the default is user
   - user
   - business_admin
   - admin
@@ -161,9 +161,9 @@ These routes accept additional parameters. Parameters marked with an asterisk ar
   - custom
 - **custom_gender**: string, required if gender is custom. The user can type any identity.
 - **pronouns**: string, required if gender is custom, must be included in:
-  - masculine (he, him)
-  - feminine (she, her)
-  - neutral (they, them)
+  - masculine
+  - feminine
+  - neutral
 `/users?email=user2@example.com&password=yourpassword&password_confirmation=yourpassword&name=John%20Doe&city=Omaha&state=NE&gender=1`
 
 ##### Update User
@@ -180,7 +180,7 @@ Same as create user, except no fields are required, unless the user is changing 
 
 ##### Create Trip
 - **user_id***: integer, in the path, the user that owns the trip
-- **distance***: decimal (up to 1 number after the decimal point), the distance traveled in miles
+- **distance***: decimal (up to 1 place after the decimal point), the distance traveled in miles
 - **time***: integer, the time traveled in minutes
 `/users/1/trips?distance=5.5&time=14`
 
@@ -198,19 +198,40 @@ Same as create user, except no fields are required, unless the user is changing 
 #### Businesses
 
 ##### Create Business
+- **name***: string, the name of the business
+- **user\_id**: integer, the user who will be the business\_admin for this business
+`/businesses?name=Cats%20In%20Hats&user_id=1`
 
 ##### Update Business
 
+Same as create business, except no fields are required.
+
 ##### Delete Business
+
+- **id***
 
 #### Rewards
 
 ##### Create Reward
+- **title*** - string, name of the reward
+- **description*** - text, details about the reward
+- **cost*** - integer, how many points the user must spend to claim the reward
+- **business_id*** - integer, the ID of the business that owns the reward
+`rewards?title=One%20Free%20Hat&description=One%20free%20hat%20from%20your%20local%20store&cost=10`
 
 ##### Update Reward
 
+Same as create reward, except no fields are required.
+
 ##### Delete Reward
+- **id***
 
 #### Redemptions
 
 ##### Create Redemption
+- **user_id***: integer, in the path, the user that owns the redemption
+- **reward_id***: integer, the ID of the reward from which the redemption was created
+`users/1/redemptions?reward_id=1`
+
+##### Destroy Redemption
+- **id***
