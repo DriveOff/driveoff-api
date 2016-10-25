@@ -47,38 +47,38 @@ The DriveOff API uses basic CRUD routes. Most of the above models have correspon
 
 Currently the paths are:
 
-| Verb   | URI Pattern                               | Description        |
-|--------|-------------------------------------------|--------------------|
-| GET    | /                                         | home               |
-| GET    | /users(.:format)                          | users index        |
-| GET    | /users/search(.:format)                   | search users       |
-| POST   | /users(.:format)                          | create user        |
-| GET    | /users/:id(.:format)                      | show user          |
-| PUT    | /users/:id(.:format)                      | update user        |
-| DELETE | /users/:id(.:format)                      | delete user        |
-| GET    | /users/:id/friends(.:format)              | user friends index |
-| PUT    | /users/:id/add_friend/:id2(.:format)      | add friend         |
-| GET    | /users/:user_id/trips(.:format)           | trips index        |
-| POST   | /users/:user_id/trips(.:format)           | create trip        |
-| GET    | /users/:user_id/trips/:id(.:format)       | show trip          |
-| PUT    | /users/:user_id/trips/:id(.:format)       | update trip        |
-| DELETE | /users/:user_id/trips/:id(.:format)       | delete trip        |
-| GET    | /users/:user_id/redemptions(.:format)     | redemptions index  |
-| POST   | /users/:user_id/redemptions(.:format)     | create redemption  |
-| GET    | /users/:user_id/redemptions/:id(.:format) | show redemption    |
-| DELETE | /users/:user_id/redemptions/:id(.:format) | delete redemption  |
-| GET    | /businesses(.:format)                     | businesses index   |
-| POST   | /businesses(.:format)                     | create business    |
-| GET    | /businesses/:id(.:format)                 | show business      |
-| PUT    | /businesses/:id(.:format)                 | update business    |
-| DELETE | /businesses/:id(.:format)                 | delete business    |
-| GET    | /rewards(.:format)                        | rewards index      |
-| POST   | /rewards(.:format)                        | create reward      |
-| GET    | /rewards/:id(.:format)                    | show reward        |
-| PUT    | /rewards/:id(.:format)                    | update reward      |
-| DELETE | /rewards/:id(.:format)                    | delete reward      |
-| POST   | /login(.:format)                          | login              |
-| DELETE | /logout(.:format)                         | logout             |
+| Verb   | URI Pattern                     | Description        |
+|--------|---------------------------------|--------------------|
+| GET    | /                               | home               |
+| GET    | /users                          | users index        |
+| GET    | /users/search                   | search users       |
+| POST   | /users                          | create user        |
+| GET    | /users/:id                      | show user          |
+| PUT    | /users/:id                      | update user        |
+| DELETE | /users/:id                      | delete user        |
+| GET    | /users/:id/friends              | user friends index |
+| PUT    | /users/:id/add_friend/:id2      | add friend         |
+| GET    | /users/:user_id/trips           | trips index        |
+| POST   | /users/:user_id/trips           | create trip        |
+| GET    | /users/:user_id/trips/:id       | show trip          |
+| PUT    | /users/:user_id/trips/:id       | update trip        |
+| DELETE | /users/:user_id/trips/:id       | delete trip        |
+| GET    | /users/:user_id/redemptions     | redemptions index  |
+| POST   | /users/:user_id/redemptions     | create redemption  |
+| GET    | /users/:user_id/redemptions/:id | show redemption    |
+| DELETE | /users/:user_id/redemptions/:id | delete redemption  |
+| GET    | /businesses                     | businesses index   |
+| POST   | /businesses                     | create business    |
+| GET    | /businesses/:id                 | show business      |
+| PUT    | /businesses/:id                 | update business    |
+| DELETE | /businesses/:id                 | delete business    |
+| GET    | /rewards                        | rewards index      |
+| POST   | /rewards                        | create reward      |
+| GET    | /rewards/:id                    | show reward        |
+| PUT    | /rewards/:id                    | update reward      |
+| DELETE | /rewards/:id                    | delete reward      |
+| POST   | /login                          | login              |
+| DELETE | /logout                         | logout             |
 
 All index paths, as well as the search path and friends path, return paginated results with 20 results per page. To proceed to the next page, make a GET request with a page parameter.
 
